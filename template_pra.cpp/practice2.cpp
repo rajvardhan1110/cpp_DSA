@@ -25,12 +25,16 @@ void createsieve(vector<bool> &prime, int n){
     }
 }
 
+bool PowOfTwo(int n){
+    return n>0 && (n & (n-1))==0;
+}
+
 void solve();
 
 int main() {
     ios::sync_with_stdio(false);
-    int t;
-    cin >> t;
+    int t=1;
+   
     while (t--) {
         solve();
     }
@@ -39,59 +43,49 @@ int main() {
 void solve() {
     // Implementation here
     int n;
-    int k;
-    char p;
     cin>>n;
-    cin>>k;
-    cin>>p;
 
-    vector<int> num(k);
-    inputV(num,k);
+    unordered_map<int,set<int>> adj;
 
-    sort(num.begin(),num.end());
+    for(int i=0; i<n; i++){
+        int u,v;
+        cin>>u>>v;
 
-    vector<int> fruit(n);
-    inputV(fruit,n);
-   
-
-    
-    bool vishal=(p=='V');
-    
-
-    int i=k-1;
-    bool se;
-
-
-    while(true){
-        se=false;
-        for(int z=0; z<n; z++){
-            if(fruit[z]>=num[i]){
-                fruit[z] -= num[i];
-                vishal =!vishal;
-
-                se=true;
-                break;
-            }
-        }
-
-        if(!se){
-            i--;
-        }
-        
-
-        if(i<0){
-            if(vishal){
-                cout<<'K'<<endl;
-                break;
-            }else{
-                cout<<'V'<<endl;
-                break;
-            }
-        }
-
-
+        adj[u].insert(v);
+        adj[v].insert(u);
     }
 
+    vector<bool> visited(n+1,false);
 
+    int ans=0;
+    int level=0;
+
+    queue<int> q;
+
+    q.push(1);
+    visited[1]=true;
+
+    while(!q.empty()){
+        int s=q.size();
+        level++;
+
+        if(PowOfTwo(level)){
+            ans++;
+        }
+
+        for(int i=0; i<s; i++){
+            int block=q.front();
+            q.pop();
+
+            for(auto it:adj[block]){
+                if(visited[it]!=true){
+                    visited[it]=true;
+                    q.push(it);
+                }
+            }
+        }
+    }
+
+    cout<<ans<<endl;
 
 }

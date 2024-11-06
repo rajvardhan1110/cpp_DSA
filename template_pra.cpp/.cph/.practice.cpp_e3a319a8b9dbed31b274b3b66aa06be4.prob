@@ -1,0 +1,1 @@
+{"name":"Local: practice","url":"/home/rajvardhan/coding/template_pra.cpp/practice.cpp","tests":[{"id":1730813621496,"input":"1\n2 3 V\n1 2 3\n7 5","output":"V"},{"id":1730813664473,"input":"1\n2 2 K\n5 2\n5 12\n","output":"V"}],"interactive":false,"memoryLimit":1024,"timeLimit":3000,"srcPath":"/home/rajvardhan/coding/template_pra.cpp/practice.cpp","group":"local","local":true}
